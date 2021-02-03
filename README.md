@@ -99,7 +99,7 @@ $ ./c2v_fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -
 ```
 
 ## Models
-* Intra-Confusion (c2v-a)
+* [Intra-Confusion (c2v-a)](https://drive.google.com/file/d/1Y1WZ14SZ3ErHNwg8yc2P_Vuxk4j9awzW/view?usp=sharing)
 * Inter-Confusion (c2v-c)
 * Concatenated wiki.en (fastText) + Intra-Confusion
 * Concatenated wiki.en (fastText) + Inter-Confusion
