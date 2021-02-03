@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <ios>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 namespace utils {
 
@@ -50,4 +50,4 @@ bool compareFirstLess(const std::pair<double, double>& l, const double& r) {
 
 } // namespace utils
 
-} // namespace fasttext
+} // namespace c2v_fasttext

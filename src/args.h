@@ -14,7 +14,7 @@
 #include <unordered_set>
 #include <vector>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 enum class model_name : int { cbow = 1, sg, sup, c2v_t, c2v_a, c2v_c, c2v_h };
 enum class loss_name : int { hs = 1, ns, softmax, ova };
@@ -96,4 +96,4 @@ class Args {
 
   static constexpr double kUnlimitedModelSize = -1.0;
 };
-} // namespace fasttext
+} // namespace c2v_fasttext

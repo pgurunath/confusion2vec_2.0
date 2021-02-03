@@ -11,7 +11,7 @@
 
 #include <cmath>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 constexpr int64_t SIGMOID_TABLE_SIZE = 512;
 constexpr int64_t MAX_SIGMOID = 8;
@@ -343,4 +343,4 @@ real SoftmaxLoss::forward(
   return -log(state.output[target]);
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

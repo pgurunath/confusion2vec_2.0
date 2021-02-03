@@ -15,9 +15,9 @@
 #include <vector>
 
 #include "args.h"
-#include "fasttext.h"
+#include "c2v_fasttext.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class AutotuneStrategy {
  private:
@@ -86,4 +86,4 @@ class Autotune {
   void train(const Args& args);
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

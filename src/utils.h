@@ -24,7 +24,7 @@
 #define FASTTEXT_DEPRECATED(msg)
 #endif
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 using Predictions = std::vector<std::pair<real, int32_t>>;
 
@@ -69,4 +69,4 @@ bool compareFirstLess(const std::pair<double, double>& l, const double& r);
 
 } // namespace utils
 
-} // namespace fasttext
+} // namespace c2v_fasttext

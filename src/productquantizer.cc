@@ -14,7 +14,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 real distL2(const real* x, const real* y, int32_t d) {
   real dist = 0;
@@ -248,4 +248,4 @@ void ProductQuantizer::load(std::istream& in) {
   }
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext

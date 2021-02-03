@@ -47,14 +47,14 @@ class ElapsedTimeMarker {
     start_ = std::chrono::steady_clock::now();
   }
   double getElapsed() {
-    return fasttext::utils::getDuration(
+    return c2v_fasttext::utils::getDuration(
         start_, std::chrono::steady_clock::now());
   }
 };
 
 } // namespace
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 constexpr double kUnknownBestScore = -1.0;
 constexpr int kCutoffLimit = 256;
@@ -474,4 +474,4 @@ void Autotune::train(const Args& autotuneArgs) {
   }
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext

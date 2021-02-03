@@ -18,7 +18,7 @@
 #include "matrix.h"
 #include "real.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class Vector;
 
@@ -80,4 +80,4 @@ class DenseMatrix : public Matrix {
     EncounteredNaNError() : std::runtime_error("Encountered NaN.") {}
   };
 };
-} // namespace fasttext
+} // namespace c2v_fasttext

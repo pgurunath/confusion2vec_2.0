@@ -8,22 +8,22 @@
 
 CXX = c++
 CXXFLAGS = -pthread -std=c++11 -march=native
-OBJS = args.o autotune.o matrix.o dictionary.o loss.o productquantizer.o densematrix.o quantmatrix.o vector.o model.o utils.o meter.o fasttext.o
+OBJS = args.o autotune.o matrix.o dictionary.o loss.o productquantizer.o densematrix.o quantmatrix.o vector.o model.o utils.o meter.o c2v_fasttext.o
 INCLUDES = -I.
 
 opt: CXXFLAGS += -O3 -funroll-loops -DNDEBUG
-opt: fasttext
+opt: c2v_fasttext
 
 coverage: CXXFLAGS += -O0 -fno-inline -fprofile-arcs --coverage
-coverage: fasttext
+coverage: c2v_fasttext
 
 debug: CXXFLAGS += -g -O0 -fno-inline
-debug: fasttext
+debug: c2v_fasttext
 
-wasm: webassembly/fasttext_wasm.js
+wasm: webassembly/c2v_fasttext_wasm.js
 
 wasmdebug: export EMCC_DEBUG=1
-wasmdebug: webassembly/fasttext_wasm.js
+wasmdebug: webassembly/c2v_fasttext_wasm.js
 
 
 args.o: src/args.cc src/args.h
@@ -62,23 +62,23 @@ utils.o: src/utils.cc src/utils.h
 meter.o: src/meter.cc src/meter.h
 	$(CXX) $(CXXFLAGS) -c src/meter.cc
 
-fasttext.o: src/fasttext.cc src/*.h
-	$(CXX) $(CXXFLAGS) -c src/fasttext.cc
+c2v_fasttext.o: src/c2v_fasttext.cc src/*.h
+	$(CXX) $(CXXFLAGS) -c src/c2v_fasttext.cc
 
-fasttext: $(OBJS) src/fasttext.cc src/main.cc
-	$(CXX) $(CXXFLAGS) $(OBJS) src/main.cc -o fasttext
+c2v_fasttext: $(OBJS) src/c2v_fasttext.cc src/main.cc
+	$(CXX) $(CXXFLAGS) $(OBJS) src/main.cc -o c2v_fasttext
 
 clean:
-	rm -rf *.o *.gcno *.gcda fasttext *.bc webassembly/fasttext_wasm.js webassembly/fasttext_wasm.wasm
+	rm -rf *.o *.gcno *.gcda c2v_fasttext *.bc webassembly/c2v_fasttext_wasm.js webassembly/c2v_fasttext_wasm.wasm
 
 
 EMCXX = em++
 EMCXXFLAGS = --bind --std=c++11 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s "EXTRA_EXPORTED_RUNTIME_METHODS=['addOnPostRun', 'FS']" -s "DISABLE_EXCEPTION_CATCHING=0" -s "EXCEPTION_DEBUG=1" -s "FORCE_FILESYSTEM=1" -s "MODULARIZE=1" -s "EXPORT_ES6=1" -s 'EXPORT_NAME="FastTextModule"' -Isrc/
-EMOBJS = args.bc autotune.bc matrix.bc dictionary.bc loss.bc productquantizer.bc densematrix.bc quantmatrix.bc vector.bc model.bc utils.bc meter.bc fasttext.bc main.bc
+EMOBJS = args.bc autotune.bc matrix.bc dictionary.bc loss.bc productquantizer.bc densematrix.bc quantmatrix.bc vector.bc model.bc utils.bc meter.bc c2v_fasttext.bc main.bc
 
 
-main.bc: webassembly/fasttext_wasm.cc
-	$(EMCXX) $(EMCXXFLAGS)  webassembly/fasttext_wasm.cc -o main.bc
+main.bc: webassembly/c2v_fasttext_wasm.cc
+	$(EMCXX) $(EMCXXFLAGS)  webassembly/c2v_fasttext_wasm.cc -o main.bc
 
 args.bc: src/args.cc src/args.h
 	$(EMCXX) $(EMCXXFLAGS)  src/args.cc -o args.bc
@@ -116,10 +116,10 @@ utils.bc: src/utils.cc src/utils.h
 meter.bc: src/meter.cc src/meter.h
 	$(EMCXX) $(EMCXXFLAGS)  src/meter.cc -o meter.bc
 
-fasttext.bc: src/fasttext.cc src/*.h
-	$(EMCXX) $(EMCXXFLAGS)  src/fasttext.cc -o fasttext.bc
+c2v_fasttext.bc: src/c2v_fasttext.cc src/*.h
+	$(EMCXX) $(EMCXXFLAGS)  src/c2v_fasttext.cc -o c2v_fasttext.bc
 
-webassembly/fasttext_wasm.js: $(EMOBJS) webassembly/fasttext_wasm.cc Makefile
-	$(EMCXX) $(EMCXXFLAGS) $(EMOBJS) -o webassembly/fasttext_wasm.js
+webassembly/c2v_fasttext_wasm.js: $(EMOBJS) webassembly/c2v_fasttext_wasm.cc Makefile
+	$(EMCXX) $(EMCXXFLAGS) $(EMOBJS) -o webassembly/c2v_fasttext_wasm.js
 
 

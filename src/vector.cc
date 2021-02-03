@@ -15,7 +15,7 @@
 
 #include "matrix.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 Vector::Vector(int64_t m) : data_(m) {}
 
@@ -93,4 +93,4 @@ std::ostream& operator<<(std::ostream& os, const Vector& v) {
   return os;
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext

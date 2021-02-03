@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <limits>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 constexpr int32_t kAllLabels = -1;
 constexpr real falseNegativeScore = -1.0;
@@ -211,4 +211,4 @@ std::vector<std::pair<real, real>> Meter::scoreVsTrue(int32_t labelId) const {
   return ret;
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext

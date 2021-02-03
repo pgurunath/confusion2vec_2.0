@@ -15,7 +15,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 Args::Args() {
   lr = 0.05;
@@ -519,4 +519,4 @@ int64_t Args::getAutotuneModelSize() const {
   return size * multiplier;
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext

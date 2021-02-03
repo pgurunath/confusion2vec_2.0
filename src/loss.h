@@ -18,7 +18,7 @@
 #include "utils.h"
 #include "vector.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class Loss {
  private:
@@ -160,4 +160,4 @@ class SoftmaxLoss : public Loss {
   void computeOutput(Model::State& state) const override;
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

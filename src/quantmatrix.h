@@ -23,7 +23,7 @@
 
 #include "productquantizer.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class QuantMatrix : public Matrix {
  protected:
@@ -57,4 +57,4 @@ class QuantMatrix : public Matrix {
   void dump(std::ostream&) const override;
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

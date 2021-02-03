@@ -14,7 +14,7 @@
 
 #include "real.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class Matrix;
 
@@ -58,4 +58,4 @@ class Vector {
 
 std::ostream& operator<<(std::ostream&, const Vector&);
 
-} // namespace fasttext
+} // namespace c2v_fasttext

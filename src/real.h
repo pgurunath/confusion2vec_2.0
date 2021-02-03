@@ -8,7 +8,7 @@
 
 #pragma once
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 typedef float real;
 }

@@ -16,7 +16,7 @@
 #include <assert.h>
 #include "real.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 class Vector;
 
@@ -41,4 +41,4 @@ class Matrix {
   virtual void dump(std::ostream&) const = 0;
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

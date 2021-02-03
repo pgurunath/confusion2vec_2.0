@@ -20,7 +20,7 @@
 #include "args.h"
 #include "real.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 typedef int32_t id_type;
 enum class entry_type : int8_t { word = 0, label = 1 };
@@ -117,4 +117,4 @@ class Dictionary {
   void init();
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

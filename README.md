@@ -38,45 +38,45 @@ All the use cases and functionality of fastText are supported and they can be re
 ### Inter-Confusion Model
 Without Pre-training / Initialization
 ```
-$ ./fasttext c2v-inter -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output inter-confusion -thread 32 -dim 300 -lr 0.01
+$ ./c2v_fasttext c2v-inter -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output inter-confusion -thread 32 -dim 300 -lr 0.01
 ```
 
 With Pre-training / Initialization on fastText skip-gram model trained on [Wikipedia](https://fasttext.cc/docs/en/pretrained-vectors.html).
 ```
-$ ./fasttext c2v-inter -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output inter-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
+$ ./c2v_fasttext c2v-inter -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output inter-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
 ```
 
 ### Intra-Confusion Model
 Without Pre-training / Initialization
 ```
-$ ./fasttext c2v-intra -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output intra-confusion -thread 32 -dim 300 -lr 0.01
+$ ./c2v_fasttext c2v-intra -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output intra-confusion -thread 32 -dim 300 -lr 0.01
 ```
 
 With Pre-training / Initialization on fastText skip-gram model trained on [Wikipedia](https://fasttext.cc/docs/en/pretrained-vectors.html).
 ```
-$ ./fasttext c2v-intra -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output intra-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
+$ ./c2v_fasttext c2v-intra -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output intra-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
 ```
 
 ### Top-Confusion Model
 Without Pre-training / Initialization
 ```
-$ ./fasttext c2v-top -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output top-confusion -thread 32 -dim 300 -lr 0.01
+$ ./c2v_fasttext c2v-top -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output top-confusion -thread 32 -dim 300 -lr 0.01
 ```
 
 With Pre-training / Initialization on fastText skip-gram model trained on [Wikipedia](https://fasttext.cc/docs/en/pretrained-vectors.html).
 ```
-$ ./fasttext c2v-top -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output top-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
+$ ./c2v_fasttext c2v-top -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output top-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
 ```
 
 ### Hybrid Inter-Intra Confusion Model 
 Without Pre-training / Initialization
 ```
-$ ./fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output hybrid-confusion -thread 32 -dim 300 -lr 0.01
+$ ./c2v_fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output hybrid-confusion -thread 32 -dim 300 -lr 0.01
 ```
 
 With Pre-training / Initialization on fastText skip-gram model trained on [Wikipedia](https://fasttext.cc/docs/en/pretrained-vectors.html).
 ```
-$ ./fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output hybrid-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
+$ ./c2v_fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output hybrid-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
 ```
 
 ## Supplementary Scripts

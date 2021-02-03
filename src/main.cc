@@ -12,14 +12,14 @@
 #include <stdexcept>
 #include "args.h"
 #include "autotune.h"
-#include "fasttext.h"
+#include "c2v_fasttext.h"
 
-using namespace fasttext;
+using namespace c2v_fasttext;
 
 void printUsage() {
   std::cerr
-      << "usage: fasttext <command> <args>\n\n"
-      << "The commands supported by fasttext are:\n\n"
+      << "usage: c2v_fasttext <command> <args>\n\n"
+      << "The commands supported by c2v_fasttext are:\n\n"
       << "  supervised              train a supervised classifier\n"
       << "  quantize                quantize a model to reduce the memory "
          "usage\n"
@@ -48,12 +48,12 @@ void printUsage() {
 }
 
 void printQuantizeUsage() {
-  std::cerr << "usage: fasttext quantize <args>" << std::endl;
+  std::cerr << "usage: c2v_fasttext quantize <args>" << std::endl;
 }
 
 void printTestUsage() {
   std::cerr
-      << "usage: fasttext test <model> <test-data> [<k>] [<th>]\n\n"
+      << "usage: c2v_fasttext test <model> <test-data> [<k>] [<th>]\n\n"
       << "  <model>      model filename\n"
       << "  <test-data>  test data filename (if -, read from stdin)\n"
       << "  <k>          (optional; 1 by default) predict top k labels\n"
@@ -63,7 +63,7 @@ void printTestUsage() {
 
 void printPredictUsage() {
   std::cerr
-      << "usage: fasttext predict[-prob] <model> <test-data> [<k>] [<th>]\n\n"
+      << "usage: c2v_fasttext predict[-prob] <model> <test-data> [<k>] [<th>]\n\n"
       << "  <model>      model filename\n"
       << "  <test-data>  test data filename (if -, read from stdin)\n"
       << "  <k>          (optional; 1 by default) predict top k labels\n"
@@ -73,7 +73,7 @@ void printPredictUsage() {
 
 void printTestLabelUsage() {
   std::cerr
-      << "usage: fasttext test-label <model> <test-data> [<k>] [<th>]\n\n"
+      << "usage: c2v_fasttext test-label <model> <test-data> [<k>] [<th>]\n\n"
       << "  <model>      model filename\n"
       << "  <test-data>  test data filename\n"
       << "  <k>          (optional; 1 by default) predict top k labels\n"
@@ -82,19 +82,19 @@ void printTestLabelUsage() {
 }
 
 void printPrintWordVectorsUsage() {
-  std::cerr << "usage: fasttext print-word-vectors <model>\n\n"
+  std::cerr << "usage: c2v_fasttext print-word-vectors <model>\n\n"
             << "  <model>      model filename\n"
             << std::endl;
 }
 
 void printPrintSentenceVectorsUsage() {
-  std::cerr << "usage: fasttext print-sentence-vectors <model>\n\n"
+  std::cerr << "usage: c2v_fasttext print-sentence-vectors <model>\n\n"
             << "  <model>      model filename\n"
             << std::endl;
 }
 
 void printPrintNgramsUsage() {
-  std::cerr << "usage: fasttext print-ngrams <model> <word>\n\n"
+  std::cerr << "usage: c2v_fasttext print-ngrams <model> <word>\n\n"
             << "  <model>      model filename\n"
             << "  <word>       word to print\n"
             << std::endl;
@@ -108,30 +108,30 @@ void quantize(const std::vector<std::string>& args) {
     exit(EXIT_FAILURE);
   }
   a.parseArgs(args);
-  FastText fasttext;
+  FastText c2v_fasttext;
   // parseArgs checks if a->output is given.
-  fasttext.loadModel(a.output + ".bin");
-  fasttext.quantize(a);
-  fasttext.saveModel(a.output + ".ftz");
+  c2v_fasttext.loadModel(a.output + ".bin");
+  c2v_fasttext.quantize(a);
+  c2v_fasttext.saveModel(a.output + ".ftz");
   exit(0);
 }
 
 void printNNUsage() {
-  std::cout << "usage: fasttext nn <model> <k>\n\n"
+  std::cout << "usage: c2v_fasttext nn <model> <k>\n\n"
             << "  <model>      model filename\n"
             << "  <k>          (optional; 10 by default) predict top k labels\n"
             << std::endl;
 }
 
 void printAnalogiesUsage() {
-  std::cout << "usage: fasttext analogies <model> <k>\n\n"
+  std::cout << "usage: c2v_fasttext analogies <model> <k>\n\n"
             << "  <model>      model filename\n"
             << "  <k>          (optional; 10 by default) predict top k labels\n"
             << std::endl;
 }
 
 void printDumpUsage() {
-  std::cout << "usage: fasttext dump <model> <option>\n\n"
+  std::cout << "usage: c2v_fasttext dump <model> <option>\n\n"
             << "  <model>      model filename\n"
             << "  <option>     option from args,dict,input,output" << std::endl;
 }
@@ -149,20 +149,20 @@ void test(const std::vector<std::string>& args) {
   int32_t k = args.size() > 4 ? std::stoi(args[4]) : 1;
   real threshold = args.size() > 5 ? std::stof(args[5]) : 0.0;
 
-  FastText fasttext;
-  fasttext.loadModel(model);
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(model);
 
   Meter meter(false);
 
   if (input == "-") {
-    fasttext.test(std::cin, k, threshold, meter);
+    c2v_fasttext.test(std::cin, k, threshold, meter);
   } else {
     std::ifstream ifs(input);
     if (!ifs.is_open()) {
       std::cerr << "Test file cannot be opened!" << std::endl;
       exit(EXIT_FAILURE);
     }
-    fasttext.test(ifs, k, threshold, meter);
+    c2v_fasttext.test(ifs, k, threshold, meter);
   }
 
   if (perLabel) {
@@ -177,7 +177,7 @@ void test(const std::vector<std::string>& args) {
       std::cout << "  ";
     };
 
-    std::shared_ptr<const Dictionary> dict = fasttext.getDictionary();
+    std::shared_ptr<const Dictionary> dict = c2v_fasttext.getDictionary();
     for (int32_t labelId = 0; labelId < dict->nlabels(); labelId++) {
       writeMetric("F1-Score", meter.f1Score(labelId));
       writeMetric("Precision", meter.precision(labelId));
@@ -228,8 +228,8 @@ void predict(const std::vector<std::string>& args) {
   }
 
   bool printProb = args[1] == "predict-prob";
-  FastText fasttext;
-  fasttext.loadModel(std::string(args[2]));
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(std::string(args[2]));
 
   std::ifstream ifs;
   std::string infile(args[3]);
@@ -243,7 +243,7 @@ void predict(const std::vector<std::string>& args) {
   }
   std::istream& in = inputIsStdIn ? std::cin : ifs;
   std::vector<std::pair<real, std::string>> predictions;
-  while (fasttext.predictLine(in, predictions, k, threshold)) {
+  while (c2v_fasttext.predictLine(in, predictions, k, threshold)) {
     printPredictions(predictions, printProb, false);
   }
   if (ifs.is_open()) {
@@ -258,12 +258,12 @@ void printWordVectors(const std::vector<std::string> args) {
     printPrintWordVectorsUsage();
     exit(EXIT_FAILURE);
   }
-  FastText fasttext;
-  fasttext.loadModel(std::string(args[2]));
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(std::string(args[2]));
   std::string word;
-  Vector vec(fasttext.getDimension());
+  Vector vec(c2v_fasttext.getDimension());
   while (std::cin >> word) {
-    fasttext.getWordVector(vec, word);
+    c2v_fasttext.getWordVector(vec, word);
     std::cout << word << " " << vec << std::endl;
   }
   exit(0);
@@ -274,11 +274,11 @@ void printSentenceVectors(const std::vector<std::string> args) {
     printPrintSentenceVectorsUsage();
     exit(EXIT_FAILURE);
   }
-  FastText fasttext;
-  fasttext.loadModel(std::string(args[2]));
-  Vector svec(fasttext.getDimension());
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(std::string(args[2]));
+  Vector svec(c2v_fasttext.getDimension());
   while (std::cin.peek() != EOF) {
-    fasttext.getSentenceVector(std::cin, svec);
+    c2v_fasttext.getSentenceVector(std::cin, svec);
     // Don't print sentence
     std::cout << svec << std::endl;
   }
@@ -290,12 +290,12 @@ void printNgrams(const std::vector<std::string> args) {
     printPrintNgramsUsage();
     exit(EXIT_FAILURE);
   }
-  FastText fasttext;
-  fasttext.loadModel(std::string(args[2]));
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(std::string(args[2]));
 
   std::string word(args[3]);
   std::vector<std::pair<std::string, Vector>> ngramVectors =
-      fasttext.getNgramVectors(word);
+      c2v_fasttext.getNgramVectors(word);
 
   for (const auto& ngramVector : ngramVectors) {
     std::cout << ngramVector.first << " " << ngramVector.second << std::endl;
@@ -314,14 +314,14 @@ void nn(const std::vector<std::string> args) {
     printNNUsage();
     exit(EXIT_FAILURE);
   }
-  FastText fasttext;
-  fasttext.loadModel(std::string(args[2]));
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(std::string(args[2]));
   std::string prompt("Query word? ");
   std::cout << prompt;
 
   std::string queryWord;
   while (std::cin >> queryWord) {
-    printPredictions(fasttext.getNN(queryWord, k), true, true);
+    printPredictions(c2v_fasttext.getNN(queryWord, k), true, true);
     std::cout << prompt;
   }
   exit(0);
@@ -340,10 +340,10 @@ void analogies(const std::vector<std::string> args) {
   if (k <= 0) {
     throw std::invalid_argument("k needs to be 1 or higher!");
   }
-  FastText fasttext;
+  FastText c2v_fasttext;
   std::string model(args[2]);
   std::cout << "Loading model " << model << std::endl;
-  fasttext.loadModel(model);
+  c2v_fasttext.loadModel(model);
 
   std::string prompt("Query triplet (A - B + C)? ");
   std::string wordA, wordB, wordC;
@@ -352,7 +352,7 @@ void analogies(const std::vector<std::string> args) {
     std::cin >> wordA;
     std::cin >> wordB;
     std::cin >> wordC;
-    printPredictions(fasttext.getAnalogies(k, wordA, wordB, wordC), true, true);
+    printPredictions(c2v_fasttext.getAnalogies(k, wordA, wordB, wordC), true, true);
 
     std::cout << prompt;
   }
@@ -362,7 +362,7 @@ void analogies(const std::vector<std::string> args) {
 void train(const std::vector<std::string> args) {
   Args a = Args();
   a.parseArgs(args);
-  std::shared_ptr<FastText> fasttext = std::make_shared<FastText>();
+  std::shared_ptr<FastText> c2v_fasttext = std::make_shared<FastText>();
   std::string outputFileName;
 
   if (a.hasAutotune() &&
@@ -378,15 +378,15 @@ void train(const std::vector<std::string> args) {
   }
   ofs.close();
   if (a.hasAutotune()) {
-    Autotune autotune(fasttext);
+    Autotune autotune(c2v_fasttext);
     autotune.train(a);
   } else {
-    fasttext->train(a);
+    c2v_fasttext->train(a);
   }
-  fasttext->saveModel(outputFileName);
-  fasttext->saveVectors(a.output + ".vec");
+  c2v_fasttext->saveModel(outputFileName);
+  c2v_fasttext->saveVectors(a.output + ".vec");
   if (a.saveOutput) {
-    fasttext->saveOutput(a.output + ".output");
+    c2v_fasttext->saveOutput(a.output + ".output");
   }
 }
 
@@ -399,23 +399,23 @@ void dump(const std::vector<std::string>& args) {
   std::string modelPath = args[2];
   std::string option = args[3];
 
-  FastText fasttext;
-  fasttext.loadModel(modelPath);
+  FastText c2v_fasttext;
+  c2v_fasttext.loadModel(modelPath);
   if (option == "args") {
-    fasttext.getArgs().dump(std::cout);
+    c2v_fasttext.getArgs().dump(std::cout);
   } else if (option == "dict") {
-    fasttext.getDictionary()->dump(std::cout);
+    c2v_fasttext.getDictionary()->dump(std::cout);
   } else if (option == "input") {
-    if (fasttext.isQuant()) {
+    if (c2v_fasttext.isQuant()) {
       std::cerr << "Not supported for quantized models." << std::endl;
     } else {
-      fasttext.getInputMatrix()->dump(std::cout);
+      c2v_fasttext.getInputMatrix()->dump(std::cout);
     }
   } else if (option == "output") {
-    if (fasttext.isQuant()) {
+    if (c2v_fasttext.isQuant()) {
       std::cerr << "Not supported for quantized models." << std::endl;
     } else {
-      fasttext.getOutputMatrix()->dump(std::cout);
+      c2v_fasttext.getOutputMatrix()->dump(std::cout);
     }
   } else {
     printDumpUsage();

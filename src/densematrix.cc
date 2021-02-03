@@ -15,7 +15,7 @@
 #include "utils.h"
 #include "vector.h"
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 DenseMatrix::DenseMatrix() : DenseMatrix(0, 0) {}
 
@@ -172,4 +172,4 @@ void DenseMatrix::dump(std::ostream& out) const {
   }
 };
 
-} // namespace fasttext
+} // namespace c2v_fasttext

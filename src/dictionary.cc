@@ -17,7 +17,7 @@
 #include <iterator>
 #include <stdexcept>
 
-namespace fasttext {
+namespace c2v_fasttext {
 
 const std::string Dictionary::EOS = "</s>";
 const std::string Dictionary::BOW = "<";
@@ -157,10 +157,10 @@ std::string Dictionary::getWord(int32_t id) const {
 
 // The correct implementation of fnv should be:
 // h = h ^ uint32_t(uint8_t(str[i]));
-// Unfortunately, earlier version of fasttext used
+// Unfortunately, earlier version of c2v_fasttext used
 // h = h ^ uint32_t(str[i]);
 // which is undefined behavior (as char can be signed or unsigned).
-// Since all fasttext models that were already released were trained
+// Since all c2v_fasttext models that were already released were trained
 // using signed char, we fixed the hash function to make models
 // compatible whatever compiler is used.
 uint32_t Dictionary::hash(const std::string& str) const {
@@ -738,4 +738,4 @@ void Dictionary::addDict(std::shared_ptr<Dictionary>& dict, bool reset) {
   }
 }
 
-} // namespace fasttext
+} // namespace c2v_fasttext
