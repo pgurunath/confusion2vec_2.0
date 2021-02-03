@@ -3,6 +3,25 @@ This repository contains the source code and data used for training Confusion2Ve
 
 The source code is an augmented version of the [fastText](https://fasttext.cc/) library from Facebook. Documentation of the origin source code can be accessed at their [website](https://fasttext.cc) or their [GitHub](https://github.com/facebookresearch/fastText) page.
 
+## Table of contents
+
+* [Installation](#installation)
+   * [Requirements](#requirements)
+   * [Building using make](#building-using-make)
+   * [Building using cmake](#building-using-cmake)
+* [Example Use Cases](#example-use-cases)
+   * [Inter-Confusion Model](#inter-confusion-model)
+   * [Intra-Confusion Model](#intra-confusion-model)
+   * [Top-Confusion Model](#top-confusion-model)
+   * [Hybrid-Confusion Model](#hybrid-confusion-model)
+* [Models](#models)
+* [Data](#data)
+* [Supplementary scripts](#supplementary-scripts)
+   * [Data Preparation](#data-preperation)
+   * [Model Concatenation](#model-concatenation)
+* [References](#references)
+* [Contact](#contact)
+
 ## Installation
 ### Requirements
  
@@ -19,9 +38,9 @@ $ cd confusion2vec_2.0
 $ make
 ```
 
-This will produce object files for all the classes as well as the main binary `fasttext`.
+This will produce object files for all the classes as well as the main binary `c2v_fasttext`.
 
-### Building fastText using cmake
+### Building using cmake
 
 ```
 $ git clone https://github.com/pgurunath/confusion2vec_2.0.git
@@ -79,6 +98,20 @@ With Pre-training / Initialization on fastText skip-gram model trained on [Wikip
 $ ./c2v_fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -output hybrid-confusion-pre-wiki -thread 32 -dim 300 -lr 0.01 -inputModel wiki.en.bin -incr
 ```
 
+## Models
+* Intra-Confusion (c2v-a)
+* Inter-Confusion (c2v-c)
+* Concatenated wiki.en (fastText) + Intra-Confusion
+* Concatenated wiki.en (fastText) + Inter-Confusion
+
+## Data
+* `data/example_sausage.txt` contains sample data for training the model.
+* Evaluation Tasks
+   * Semantic-Syntactic Analogy Task: `data/evaluation_data/analogy_tasks/questions-words.txt`
+   * Homophone Analogy Task: `data/evaluation_data/analogy_tasks/homophone_analogy.txt`
+   * Word Similarity Task: `data/evaluation_data/similarity_tasks/wordsim353.tsv`
+   * Acoustic Similarity Task: `data/evaluation_data/similarity_tasks/homophone_ratings.txt`
+
 ## Supplementary Scripts
 ### Data Preparation
 Converting Kaldi Sausage format to compatible text format for training confusion2vec models
@@ -86,9 +119,14 @@ Converting Kaldi Sausage format to compatible text format for training confusion
 python scripts/convert_sausage.py exp/chain/decode/sausage.lat.txt data/lang/words.txt sausage.txt
 ```
 
+### Model Concatenation
+```
+bash scripts/concat.sh wiki.en.vec intra-confusion.vec concat-wiki-intra-confusion.vec
+```
+
 ## References
 If you use this code please cite:
 Prashanth Gurunath Shivakumar, Panayiotis Georgiou, Shrikanth Narayanan, *Confusion2Vec 2.0: Enriching Ambiguous Spoken Language Representations with Subwords*
 
-### Contact
+## Contact
 * E-mail: [pgurunat@usc.edu](mailto:pgurunat@usc.edu)
