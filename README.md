@@ -100,7 +100,7 @@ $ ./c2v_fasttext c2v-hybrid -t 0.001 -neg 64 -ws 5 -epoch 5 -input sausage.txt -
 
 ## Models
 * [Intra-Confusion (c2v-a)](https://drive.google.com/file/d/1Y1WZ14SZ3ErHNwg8yc2P_Vuxk4j9awzW/view?usp=sharing)
-* Inter-Confusion (c2v-c)
+* [Inter-Confusion (c2v-c)](https://drive.google.com/file/d/1kiVrZMa3UGBxHLq7GCkvtXMaTe-MXJBq/view?usp=sharing)
 * Concatenated wiki.en (fastText) + Intra-Confusion
 * Concatenated wiki.en (fastText) + Inter-Confusion
 
@@ -126,7 +126,14 @@ bash scripts/concat.sh wiki.en.vec intra-confusion.vec concat-wiki-intra-confusi
 
 ## References
 If you use this code please cite:
-Prashanth Gurunath Shivakumar, Panayiotis Georgiou, Shrikanth Narayanan, *Confusion2Vec 2.0: Enriching Ambiguous Spoken Language Representations with Subwords*
-
+Prashanth Gurunath Shivakumar, Panayiotis Georgiou, Shrikanth Narayanan, [*Confusion2Vec 2.0: Enriching Ambiguous Spoken Language Representations with Subwords*](https://arxiv.org/abs/2102.02270)
+```
+@article{shivakumar2021confusion2vec,
+      title={Confusion2vec 2.0: Enriching Ambiguous Spoken Language Representations with Subwords}, 
+      author={Prashanth Gurunath Shivakumar and Panayiotis Georgiou and Shrikanth Narayanan},
+      year={2021},
+      journal={arXiv preprint arXiv:2102.02270},
+}
+```
 ## Contact
 * E-mail: [pgurunat@usc.edu](mailto:pgurunat@usc.edu)
