@@ -1,5 +1,5 @@
 # Confusion2Vec 2.0
-This repository contains the source code and data used for training Confusion2Vec 2.0 word vector representation models. We also make the pre-trained embeddings.
+This repository contains the source code and data used for training [Confusion2Vec 2.0](https://arxiv.org/abs/2102.02270) word vector representation models. We also make the pre-trained embeddings available.
 
 The source code is an augmented version of the [fastText](https://fasttext.cc/) library from Facebook. Documentation of the origin source code can be accessed at their [website](https://fasttext.cc) or their [GitHub](https://github.com/facebookresearch/fastText) page.
 
