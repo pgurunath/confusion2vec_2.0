@@ -447,8 +447,10 @@ void FastText::topconfusion(
     real lr,
     const std::vector<std::vector<int32_t>>& sausage) {
   std::vector<int32_t> line;
-  for (auto it = sausage.cbegin(); it != sausage.cend(); ++it) {
-    line.push_back(it->front());
+  for (int32_t cidx = 0; cidx < sausage.size(); cidx++) {
+    if (sausage[cidx].size() > 0) {
+      line.push_back(sausage[cidx][0]);
+    }
   }
   skipgram(state, lr, line);
 }
