@@ -51,6 +51,8 @@ Args::Args() {
   autotunePredictions = 1;
   autotuneDuration = 60 * 5; // 5 minutes
   autotuneModelSize = "";
+  
+  incr = false;
 }
 
 std::string Args::lossToString(loss_name ln) const {
